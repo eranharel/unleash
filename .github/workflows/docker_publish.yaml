@@ -33,7 +33,7 @@ jobs:
         id: meta
         with:
           images: |
-            unleashorg/unleash-server
+            cnvrg/unleash-server
           tags: |
             # only enabled for v* tags:
             type=semver,pattern={{ version }},enable=${{ startsWith(github.ref, 'refs/tags/v') }}
