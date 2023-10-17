@@ -11,7 +11,7 @@ export const defaultValue: IUiConfig = {
         current: {
             oss: 'false',
             enterprise: 'true',
-        }
+        },
     },
     slogan: 'The enterprise ready feature toggle service.',
     flags: {
