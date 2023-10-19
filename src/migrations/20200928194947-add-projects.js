@@ -21,7 +21,9 @@ exports.up = function (db, cb) {
             db.runSql.bind(
                 db,
                 `
-              INSERT INTO projects(id, name, description) VALUES('default', 'Default', 'Default project');
+              INSERT INTO projects(id, name, description)
+              VALUES('default', 'Default', 'Default project'),
+                    ('idc-cloud', 'IDC Cloud', 'IDC Cloud project');
               `,
             ),
         ],

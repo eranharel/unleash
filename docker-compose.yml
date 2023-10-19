@@ -48,7 +48,9 @@ services:
   db:
     expose:
       - "5432"
-    image: postgres:15
+    ports:
+      - 5432:5432
+    image: postgres:16
     environment:
       # create a database called `db`
       POSTGRES_DB: "db"
@@ -67,3 +69,8 @@ services:
       timeout: 1m
       retries: 5
       start_period: 10s
+
+#  pgadmin:
+#    image: chorss/docker-pgadmin4
+#    ports:
+#      - 5050:5050

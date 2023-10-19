@@ -1,13 +1,29 @@
+const async = require('async');
 exports.up = function (db, cb) {
-    db.runSql(
-        `
-        INSERT INTO project_environments(project_id, environment_name)
-        SELECT id, 'default'
-        FROM projects
-        ON CONFLICT DO NOTHING;
-    `,
+    async.series(
+        [
+            db.runSql.bind(db,
+                `
+                    INSERT INTO project_environments(project_id, environment_name)
+                    SELECT id, 'default'
+                    FROM projects
+                    ON CONFLICT DO NOTHING;
+                `,
+            ),
+            db.runSql.bind(db,
+                `
+                INSERT INTO project_environments(project_id, environment_name)
+                SELECT projects.id, environments.name
+                FROM projects, environments
+                WHERE projects.id <> 'default'
+                ON CONFLICT DO NOTHING;
+                `,
+                cb,
+            )
+        ],
         cb,
-    );
+    )
+
 };
 
 exports.down = function (db, cb) {
